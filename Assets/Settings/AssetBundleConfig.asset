@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72eeff12971a609469d9e3f88326f0ca, type: 3}
+  m_Name: AssetBundleConfig
+  m_EditorClassIdentifier: 
+  CustomFolder: AssetBundles
+  BundleExtension: .assetbundle
+  ManifestFile: version.bytes
+  DependenceBundleName: other
+  SortType: 0
+  BuildTarget: 20
+  OutputDirectory: 
+  Options: 12544
+  UserData: 
+  EncryptFiles: {fileID: 4900000, guid: 5a230027ae4f4b4429949e2d088cb8f9, type: 3}
+  BulitinFiles: {fileID: 4900000, guid: 583c1c116e407f6448786f17a5dce66e, type: 3}
+  BundleItems:
+  - Source: {fileID: 102900000, guid: acd8a501f3ae005489ec2a621c3b1180, type: 3}
+    PackType: 1
+    AssetType: 5
+  - Source: {fileID: 102900000, guid: 749cf6b6c9b3bac4791df1c1f5319782, type: 3}
+    PackType: 0
+    AssetType: 0
+  - Source: {fileID: 102900000, guid: 9327b46eb2445574186bb4476d3be620, type: 3}
+    PackType: 2
+    AssetType: 0
+  - Source: {fileID: 102900000, guid: 017d914c2c882ec42ba9414b0a932618, type: 3}
+    PackType: 1
+    AssetType: 3
+  - Source: {fileID: 102900000, guid: 35405e8a6870b90458e5af2a911d0df6, type: 3}
+    PackType: 0
+    AssetType: 2
+  - Source: {fileID: 102900000, guid: 7dc7924f35bbc764b96be04538961e56, type: 3}
+    PackType: 2
+    AssetType: 4
+  - Source: {fileID: 102900000, guid: c383cbc6ca3fa0e418b991731623151f, type: 3}
+    PackType: 0
+    AssetType: 1
+  - Source: {fileID: 102900000, guid: 7a2643f73ba3e254b9400b419a6ed05e, type: 3}
+    PackType: 2
+    AssetType: 7

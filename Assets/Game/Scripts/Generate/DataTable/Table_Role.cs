@@ -1,0 +1,87 @@
+
+using UnityEngine;
+using System.Collections.Generic;
+using Framework.DataTable;
+using Framework;
+public partial class Role_Table : DataTableLoader<Role_Data>
+{
+    public override string GetTableName() { return "Role"; }
+    protected override Role_Data CreateItem()
+    {
+        return new Role_Data();
+    }
+    public Role_Table()
+    {
+        _branchs = new List<string>() { "" };
+    }
+#if true
+    private Dictionary<int, int> _keyToIndex;
+    protected override bool hasIndexKey()
+    {
+        return true;
+    }
+    protected override void onPostBefore()
+    {
+        base.onPostBefore();
+        if (_keyToIndex == null)
+        {
+            _keyToIndex = new Dictionary<int, int>(ItemCount);
+        }
+        else
+        {
+            _keyToIndex.Clear();
+        }
+        if (DecodeInstant())
+        {
+            var len = DataList.Count;
+            for (int i = 0; i < len; i++)
+            {
+                var item = DataList[i];
+                if (_keyToIndex.ContainsKey(item.Id))
+                {
+                    Debug.LogErrorFormat("{0} 存在相同的索引 {1}", GetFileName(), item.Id);
+                    continue;
+                }
+                _keyToIndex.Add(item.Id, i);
+            }
+        }
+    }
+    public Role_Data Get(int key)
+    {
+        if (_keyToIndex!=null && _keyToIndex.TryGetValue(key, out int index))
+        {
+            return GetItem(index);
+        }
+        return null;
+    }
+#endif
+}
+
+public partial class Role_Data : IDataTable
+{
+	public int Id { get; protected set; }
+	public string Name { get; protected set; }
+	public CarMoudleProperty[] Propertys { get; protected set; }
+	public string Asset { get; protected set; }
+	public void Parse(string[] values)
+	{
+		Id = Utils.Parse.ParseInt(values[0]);
+		Name = values[1];
+		if (Utils.Parse.ParseList(values[2]) is string[]  s_Propertys) { var f_Propertys = new List<CarMoudleProperty>(); for (int i = 0; i < s_Propertys.Length; i++) { f_Propertys.Add(CarMoudleProperty.Parse(s_Propertys[i])); } Propertys = f_Propertys.ToArray(); }
+		Asset = values[3];
+	}
+    public void Encode(ByteArray buffer)
+    {
+		buffer.Write(Id);
+		buffer.Write(Name);
+		if(Propertys!=null) { ushort PropertysLen = (ushort)Propertys.Length;buffer.Write(PropertysLen); for (int i = 0; i < PropertysLen; i++) { CarMoudleProperty.Encode(Propertys[i],buffer); } }else { buffer.Write((ushort)0); }
+		buffer.Write(Asset);
+    }
+    public virtual void Decode(ByteArray buffer)
+    {
+		Id = buffer.ReadInt();
+		Name = buffer.ReadString();
+		var PropertysLen = buffer.ReadUshort(); Propertys = new CarMoudleProperty[PropertysLen]; for (int i = 0; i < PropertysLen; i++) { Propertys[i] = CarMoudleProperty.Decode(buffer); }
+		Asset = buffer.ReadString();
+    }
+}

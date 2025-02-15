@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83aa3470a811c284d9bfaedce443ec27, type: 3}
+  m_Name: GameProcedure
+  m_EditorClassIdentifier: 
+  Type: Framework.FsmStateAction
+  x: 143
+  y: 289
+  zoom: 1
+  Entry:
+    x: -3
+    y: 100
+    EntryPoint: 2
+  States:
+  - Name: GameMain
+    x: 607
+    y: 100
+  - Name: GameLogin
+    x: 404
+    y: 100
+  - Name: GamePreload
+    x: 196
+    y: 100
+  - Name: GameWorld
+    x: 1089
+    y: 111
+  Events:
+  - Game
+  - Finished
+  Actions:
+  - Type: GameMain
+    Name: GameMain
+    State: 0
+    Params: []
+  - Type: GameLogin
+    Name: GameLogin
+    State: 1
+    Params: []
+  - Type: GamePreload
+    Name: GamePreload
+    State: 2
+    Params: []
+  - Type: GameWorld
+    Name: GameWorld
+    State: 3
+    Params: []
+  Transitions:
+  - EventId: 0
+    From: 0
+    To: 3
+  - EventId: 1
+    From: 1
+    To: 0
+  - EventId: 1
+    From: 2
+    To: 1
